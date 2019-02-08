@@ -8,7 +8,7 @@ massBall = 0.019;% The mass of the ball.
 
 %%% Getting started.
 tick = 0;
-data = zeros(int32(timeEnd/dt), 4);
+data = zeros(int32(timeEnd/dt), 5);
 position = startPosition;
 velocity = startVelocity;
 data(1, 2) = startPosition;
@@ -30,22 +30,28 @@ while tick<=timeEnd/dt
     data(tick, 2) = position;
     data(tick, 3) = velocity;
     data(tick, 4) = calForceMagnet(-oldPosition, current);
+    data(tick, 5) = current;
     
 end
 
 plot(data(:,1), data(:,2))
-xlabel('time')
-ylabel('position')
+xlabel('Time')
+ylabel('Position')
 
 figure
 plot(data(:,1), data(:,3))
-xlabel('time')
-ylabel('velocity')
+xlabel('Time')
+ylabel('Velocity')
 
 figure
 plot(data(:,1), data(:,4))
-xlabel('time')
-ylabel('force magnet')
+xlabel('Time')
+ylabel('Force magnet')
+
+figure
+plot(data(:,1), data(:,5))
+xlabel('Time')
+ylabel('Current')
 
 figure
 plot(data(:,1), [data(:,2) data(:,3) data(:,4)])

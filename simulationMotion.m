@@ -1,8 +1,10 @@
 %%% Some settings of the simulation
 dt = 0.01;% Steps in time of the simulation.
-timeEnd = 1;% End time of the simulation.
-startPosition = 0.01;%
+timeEnd = 60;% End time of the simulation.
+startPosition = -0.01;%
+targetPosition = -0.07;
 startVelocity = 0.0;%
+massBall = 0.019;
 
 %%% Getting started.
 tick = 0;
@@ -17,9 +19,9 @@ while tick<=timeEnd/dt
     tick = tick+1;
     oldPosition = position;
     oldVelocity = velocity;
-    current = 1;
+    current = getStablizingCurrent(oldPosition, oldVelocity, targetPosition, massBall);
     
-    acceleration = calAccelerationTotal(position, current);
+    acceleration = calAccelerationTotal(position, current, massBall);
     
     velocity = oldVelocity + acceleration * dt;
     position = oldPosition + oldVelocity * dt + 0.5*acceleration*dt^2;
@@ -27,7 +29,7 @@ while tick<=timeEnd/dt
     data(tick, 1) = tick*dt;
     data(tick, 2) = position;
     data(tick, 3) = velocity;
-    data(tick, 4) = calForceMagnet(oldPosition, current);
+    data(tick, 4) = calForceMagnet(-oldPosition, current);
     
 end
 

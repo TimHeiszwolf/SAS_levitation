@@ -1,3 +1,6 @@
+%{
+A function the determines the needed current to get a certain acceleration.
+%}
 function current = getCurrentAcceleration(distance, acceleration, massBall)
     %%% Hardcoding some variables
     g = -9.81;

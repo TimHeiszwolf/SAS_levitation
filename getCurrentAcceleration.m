@@ -7,4 +7,4 @@ function current = getCurrentAcceleration(distance, acceleration, massBall)
     coilConstant = 1.36 * 10^-3;% Not yet measured just taken from the sylabus.
     metalConstant = 7.14 * 10^-4;% Not yet measured just taken from the sylabus.
     
-    current = ((acceleration-g)*massBall*abs(distance)-metalConstant)/coilConstant;
+    current = ((acceleration - g) * massBall * abs(distance) - metalConstant) / coilConstant;

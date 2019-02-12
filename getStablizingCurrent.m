@@ -1,12 +1,10 @@
 %{
 A function to get the current needed for stablizing the ball. It first
 calculates the needed acceleration and then uses a other function to get
-the current.
+the current. It calculates the needed acceleration based on the distance to
+the target and a 'friction' part which prevents the ball from never
+stabelizing.
 %}
-function neededCurrent = getStablizingCurrent(distance, velocity, target, massBall)
-    %%% Hardcoding some stuff
-    frictionConstant = 1;% The amount of friction (acceleration counteracting the velocity) which prevents large ocilations and makes the system stable.
-    accelerationConstant = 1;% The amount of acceleration to reach the target.
-    
+function neededCurrent = getStablizingCurrent(distance, velocity, target, massBall, frictionConstant, accelerationConstant)
     acceleration = accelerationConstant*(target-distance) - frictionConstant * velocity;
     neededCurrent = getCurrentAcceleration(distance, acceleration, massBall);

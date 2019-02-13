@@ -6,5 +6,5 @@ the target and a 'friction' part which prevents the ball from never
 stabelizing.
 %}
 function neededCurrent = getStablizingCurrent(distance, velocity, target, massBall, frictionConstant, accelerationConstant)
-    acceleration = accelerationConstant*(target-distance) - frictionConstant * velocity;
+    acceleration = accelerationConstant * (target - distance) - frictionConstant * velocity;
     neededCurrent = getCurrentAcceleration(distance, acceleration, massBall);

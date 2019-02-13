@@ -1,5 +1,5 @@
 %%% Some settings of the simulation
-dt = 0.01;% Steps in time of the simulation.
+dt = 0.001;% Steps in time of the simulation.
 timeEnd = 15;% End time of the simulation.
 startPosition = -0.01;% Starting position of the ball.
 targetPosition = -0.04;% Target position of the ball.

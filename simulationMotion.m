@@ -21,7 +21,7 @@ function outputData = simulationMotion(dt, timeEnd, startPosition, targetPositio
         %%% Calculating the effects of this tick on the kinimatics of the ball.
         acceleration = calAccelerationTotal(position, current, massBall);
         velocity = oldVelocity + acceleration * dt;
-        position = oldPosition + oldVelocity * dt + 0.5*acceleration*dt^2;
+        position = oldPosition + oldVelocity * dt + 0.5 * acceleration * dt^2;
         
         %%% Assiging the data of the tick to the (empty) data matrix/array.
         data(tick, 1) = tick*dt;

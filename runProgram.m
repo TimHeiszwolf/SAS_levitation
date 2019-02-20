@@ -17,6 +17,7 @@ time = 0:dt:timeEnd;
 distance = differentialEquationSolution(time, startPosition, targetPosition, frictionConstant, accelerationConstant);
 figure
 plot(time, distance)
+title('Analytical position against time')
 xlabel('Time')
 ylabel('Position')
 
@@ -33,5 +34,6 @@ optimalFrictionConstantVector = arrayfun(@(x) getOptimalConstants(startPosition,
 
 figure
 plot(accelerationConstantVector, optimalFrictionConstantVector)
+title('Optimal friction constant against acceleration constant')
 xlabel('Acceleration constant')
 ylabel('Optimal friction constant')

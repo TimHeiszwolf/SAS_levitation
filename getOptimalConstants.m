@@ -1,38 +1,13 @@
-%%% Some settings of the simulation
-dt = 0.001;% Steps in time of the simulation.
-timeEnd = 150;% End time of the simulation.
-startPosition = -0.01;% Starting position of the ball.
-targetPosition = -0.04;% Target position of the ball.
-startVelocity = 0.0;% Startin velocity of the ball.
-fraction=1/5;
-raSteps=0.001;
-raEnd=2;
-stableTimeRequired=10;
-massBall = 0.019;% The mass of the ball.
-accelerationConstant = 1;% The amount of acceleration to reach the target.
-
-bestTime=timeEnd;
-bestFraction=0;
-for tick = 0:(raEnd/raSteps)
-    ra=tick*raSteps;
-    stableTime=0;
-    for time = 0:dt:timeEnd
-        if abs(startPosition-targetPosition)*fraction>abs(targetPosition-differentialEquationSolution(time, startPosition, targetPosition, ra * accelerationConstant, accelerationConstant))
-            stableTime=stableTime+dt;
-        else
-            stableTime=0;
-        end
-        
-        if stableTime>stableTimeRequired&&(time-stableTime)<bestTime
-            %{
-            disp(abs(startPosition-targetPosition)*fraction)
-            disp(abs(targetPosition-differentialEquationSolution(time, startPosition, targetPosition, ra * accelerationConstant, accelerationConstant)))
-            disp(time-stableTime)
-            disp(ra)
-            %}
-            bestTime=time-stableTime;
-            bestFraction=ra;
-            break
-        end
-    end
-end
+%{
+Gets the optimal constant for the friction constant as a function of the
+acceleration constant (and the other parameters related to the simulation)
+using the differential equation.
+%}
+function optimalConstant = getOptimalConstants(startPosition, targetPosition, stableFraction, accelerationConstant, dt, timeEnd)
+    raSteps = 0.01;% The steps in the ratio.
+    raEnd = 2;% The maximum of the ratio the friction constant with respect to the acceleration constant.
+    
+    ra = 0:raSteps:raEnd;
+    frictionConstant = ra * accelerationConstant;
+    [settlingTime, frictionConstantIndex] = min(arrayfun(@(x) getSettlingTime(startPosition, targetPosition, x, accelerationConstant, dt, timeEnd, stableFraction), frictionConstant));
+    optimalConstant = frictionConstant(frictionConstantIndex) * accelerationConstant;

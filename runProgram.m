@@ -19,3 +19,19 @@ figure
 plot(time, distance)
 xlabel('Time')
 ylabel('Position')
+
+%%% Determining optimal constants
+stableFraction = 1/5;% The fraction of the target value that needs to be reached before the system is stable.
+timeEnd = 200;% The maximum time for determining stability.
+accelerationConstantSteps = 0.05;% The steps in the acceleration constant.
+accelerationConstantEnd = 2;% The maximim value of the acceleration constant.
+
+currentOptimalFrictionConstant = getOptimalConstants(startPosition, targetPosition, stableFraction, accelerationConstant, dt, timeEnd);
+
+accelerationConstantVector = 0:accelerationConstantSteps:accelerationConstantEnd;
+optimalFrictionConstantVector = arrayfun(@(x) getOptimalConstants(startPosition, targetPosition, stableFraction, x, dt, timeEnd), accelerationConstantVector);
+
+figure
+plot(accelerationConstantVector, optimalFrictionConstantVector)
+xlabel('Acceleration constant')
+ylabel('Optimal friction constant')

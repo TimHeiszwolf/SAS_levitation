@@ -22,8 +22,8 @@ xlabel('Time')
 ylabel('Position')
 
 %%% Determining optimal constants
-stableFraction = 1/5;% The fraction of the target value that needs to be reached before the system is stable.
-timeEnd = 200;% The maximum time for determining stability.
+stableFraction = 1/20;% The fraction of the target value that needs to be reached before the system is stable.
+timeEnd = 1000;% The maximum time for determining stability.
 accelerationConstantSteps = 0.05;% The steps in the acceleration constant.
 accelerationConstantEnd = 2;% The maximim value of the acceleration constant.
 

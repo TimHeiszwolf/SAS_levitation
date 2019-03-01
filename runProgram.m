@@ -5,8 +5,8 @@ startPosition = -0.01;% Starting position of the ball.
 targetPosition = -0.04;% Target position of the ball.
 startVelocity = 0.0;% Startin velocity of the ball.
 massBall = 0.019;% The mass of the ball.
-frictionConstant = 2;% The amount of friction (acceleration counteracting the velocity) which prevents large ocilations and makes the system stable.
-accelerationConstant = 1;% The amount of acceleration to reach the target.
+accelerationConstant = 1.5;% The amount of acceleration to reach the target.
+frictionConstant = 2*1.5^0.5;% The amount of friction (acceleration counteracting the velocity) which prevents large ocilations and makes the system stable.
 randomChance = 0.1;% The chance per second that a random infulence ocours
 randomChanceMagnitude = 0.02;% The magnitude in meters per second of a random influence.
 
@@ -23,7 +23,6 @@ title('Analytical position against time')
 xlabel('Time')
 ylabel('Position')
 
-%{
 %%% Determining optimal constants
 stableFraction = 1/20;% The fraction of the target value that needs to be reached before the system is stable.
 timeEnd = 1000;% The maximum time for determining stability.
@@ -40,4 +39,3 @@ plot(accelerationConstantVector, optimalFrictionConstantVector)
 title('Optimal friction constant against acceleration constant')
 xlabel('Acceleration constant')
 ylabel('Optimal friction constant')
-%}

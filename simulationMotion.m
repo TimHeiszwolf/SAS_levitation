@@ -2,7 +2,7 @@
 A function which simulates the motion of the ball acourding to certain
 parameters.
 %}
-function outputData = simulationMotion(dt, timeEnd, startPosition, targetPosition, startVelocity, massBall, frictionConstant, accelerationConstant)
+function outputData = simulationMotion(dt, timeEnd, startPosition, targetPosition, startVelocity, massBall, frictionConstant, accelerationConstant, randomChance, randomChanceMagnitude)
     %%% Getting started.
     tick = 0;
     data = zeros(int32(timeEnd/dt), 5);
@@ -13,9 +13,15 @@ function outputData = simulationMotion(dt, timeEnd, startPosition, targetPositio
 
     %%% Doing the actual simulation.
     while tick<=timeEnd/dt
-        tick = tick+1;
+        tick = tick + 1;
         oldPosition = position;
         oldVelocity = velocity;
+        
+        if rand() <= randomChance * dt
+            oldVelocity = oldVelocity + randomChanceMagnitude * sign(rand()-0.5);
+            disp('Added disturbance.')
+        end
+        
         current = getStablizingCurrent(oldPosition, oldVelocity, targetPosition, massBall, frictionConstant, accelerationConstant);
         
         %%% Calculating the effects of this tick on the kinimatics of the ball.
@@ -24,7 +30,7 @@ function outputData = simulationMotion(dt, timeEnd, startPosition, targetPositio
         position = oldPosition + oldVelocity * dt + 0.5 * acceleration * dt^2;
         
         %%% Assiging the data of the tick to the (empty) data matrix/array.
-        data(tick, 1) = tick*dt;
+        data(tick, 1) = tick * dt;
         data(tick, 2) = position;
         data(tick, 3) = velocity;
         data(tick, 4) = calForceMagnet(-oldPosition, current);

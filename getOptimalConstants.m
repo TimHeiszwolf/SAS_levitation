@@ -10,4 +10,4 @@ function optimalConstant = getOptimalConstants(startPosition, targetPosition, st
     ra = 0:raSteps:raEnd;
     frictionConstant = ra * accelerationConstant;
     [settlingTime, frictionConstantIndex] = min(arrayfun(@(x) getSettlingTime(startPosition, targetPosition, x, accelerationConstant, dt, timeEnd, stableFraction), frictionConstant));
-    optimalConstant = frictionConstant(frictionConstantIndex) * accelerationConstant;
+    optimalConstant = frictionConstant(frictionConstantIndex);
